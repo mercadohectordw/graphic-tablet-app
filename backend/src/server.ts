@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { db } from "./db";
 
 const app = express();
 const port = 3000;
@@ -9,8 +10,8 @@ app.use(cors({
   origin: ["http://localhost:4200"]
 }))
 
-app.get("/api/products/", (req, res) => {
-  res.send("Hello world");
+app.get("/api/products/", async (req, res) => {
+  res.json(await db.query("select * from users"));
 });
 
 app.listen(port, () => {

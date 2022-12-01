@@ -1,1 +1,24 @@
-<p>home works!</p>
+<main class="container mx-auto pt-2 pb-10">
+  <h2 class="text-center text-xl">
+    Productos:
+  </h2>
+
+  <ul class="flex flex-wrap gap-4">
+    <li *ngFor="let p of productos" class="basis-1/5">
+      <a routerLink="/product/{{p.id}}">
+        <img src="{{p.imageUrl}}" alt="{{p.name}}" class="w-full h-48 object-contain">
+      </a>
+
+      <a routerLink="/product/{{p.id}}" class="">
+        <span class="">{{p.name}}</span>
+      </a>
+
+      <div class="w-full flex flex-row items-center place-content-between">
+        <span class="">{{p.price | currency}}</span>
+        <button class="bg-green-300 p-2 rounded ml-auto">
+          Agregar al Carrito
+        </button>
+      </div>
+    </li>
+  </ul>
+</main>

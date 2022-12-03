@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { db } from "./db";
+import productsRouter from "./routers/products.router";
 
 const app = express();
 const port = 3000;
@@ -10,9 +10,7 @@ app.use(cors({
   origin: ["http://localhost:4200"]
 }))
 
-app.get("/api/products/", async (req, res) => {
-  res.json(await db.query("select * from users"));
-});
+app.use("/api/products", productsRouter);
 
 app.listen(port, () => {
   console.log("Api loaded on http://localhost:" + port);

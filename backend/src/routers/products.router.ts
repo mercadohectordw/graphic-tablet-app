@@ -1,11 +1,11 @@
-import { db } from "../db";
 import { Router } from "express";
+import { getAllProducts, getProductsById, getProductsByCategory, createProduct, updateProduct, deleteProduct} from "../controllers/products.controller";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
-  let products = await db.query("select * from users");
-  res.json(products[0]);
-});
+router.get("/", getAllProducts);
+
+//router.get("/");
+
 
 export default router;

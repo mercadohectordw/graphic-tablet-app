@@ -5,7 +5,9 @@ const router = Router();
 
 router.get("/", getAllProducts);
 
-//router.get("/");
+router.get("/category/:categoryId", getProductsByCategory);
+
+router.get("/:productId", getProductsById);
 
 
 export default router;

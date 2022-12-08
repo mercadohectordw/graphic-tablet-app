@@ -2,7 +2,11 @@ import { db } from "../db";
 
 
 export const getAllProducts = (req:any, res:any) => {
-  db.query(`SELECT * FROM product`)
+  let query = `
+    SELECT * FROM product
+  `;
+
+  db.query(query)
     .then(([rows]) => {
       res.status(200).json(rows);
     })
@@ -12,7 +16,12 @@ export const getAllProducts = (req:any, res:any) => {
 };
 
 export const getProductsByCategory = (req:any, res:any) => {
-  db.query(`SELECT * FROM product WHERE category_id = ${[req.params.categoryId]}`)
+  let query = `
+    SELECT * FROM product
+    WHERE category_id = ${[req.params.categoryId]}
+  `;
+  
+  db.query(query)
     .then(([rows]) => {
       let result = JSON.parse(JSON.stringify(rows));
 
@@ -28,7 +37,12 @@ export const getProductsByCategory = (req:any, res:any) => {
 };
 
 export const getProductsById = (req:any, res:any) => {
-  db.query(`SELECT * FROM product WHERE id = ${[req.params.productId]}`)
+  let query = `
+    SELECT * FROM product
+    WHERE id = ${[req.params.productId]}
+  `;
+
+  db.query(query)
     .then(([row]) => {
       let result = JSON.parse(JSON.stringify(row));
 

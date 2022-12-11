@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import productsRouter from "./routers/products.router";
 import usersRouter from "./routers/users.router";
+import cartsRouter from "./routers/carts.router"
 
 const app = express();
 const port = 3000;
@@ -12,7 +13,8 @@ app.use(cors({
 }))
 
 app.use("/api/products", productsRouter);
-app.use("/api/users", usersRouter)
+app.use("/api/users", usersRouter);
+app.use("/api/carts", cartsRouter);
 
 app.listen(port, () => {
   console.log("Api loaded on http://localhost:" + port);

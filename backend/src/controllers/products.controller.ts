@@ -36,7 +36,7 @@ export const getProductsByCategory = (req:any, res:any) => {
     });
 };
 
-export const getProductsById = (req:any, res:any) => {
+export const getProductById = (req:any, res:any) => {
   let query = `
     SELECT * FROM product
     WHERE id = ${[req.params.productId]}
@@ -49,11 +49,28 @@ export const getProductsById = (req:any, res:any) => {
       if(result.length <= 0) {
         res.status(404).send("Producto no encontrado");
       } else {
-        res.status(200).json(result[0]);
+        getProductWithImages(result[0], res);
       }
     })
     .catch((err) => {
       res.status(400).send(err);
+    });
+};
+
+const getProductWithImages = (product:any, res:any) => {
+  let query = `
+    SELECT image_url AS url
+    FROM product_image
+    WHERE product_id = ${product.id}
+  `;
+
+  db.query(query)
+    .then(([rows]) => {
+      product.images = JSON.parse(JSON.stringify(rows));
+      res.status(200).json(product);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 

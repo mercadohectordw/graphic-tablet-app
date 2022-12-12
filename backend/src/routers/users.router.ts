@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { getAllUsers, getUserById } from "../controllers/users.controller";
+import { getAllUsers, getUserById, loginUser, registerUser } from "../controllers/users.controller";
 
 const router = Router();
 
 router.get("/", getAllUsers);
 
-router.post("/login", );
+router.post("/login", loginUser);
 
-router.post("/register", );
+router.post("/register", registerUser);
 
 router.get("/:userId", getUserById);
 

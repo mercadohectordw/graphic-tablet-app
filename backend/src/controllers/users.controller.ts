@@ -1,4 +1,21 @@
 import { db } from "../db";
+import { loginValidation, registerValidation } from "../middleware/validation"
+
+export const loginUser = (req:any, res:any) => {
+  let logData = req.body;
+
+  let validation = loginValidation(logData);
+
+  res.status(200).send(validation);
+};
+
+export const registerUser = (req:any, res:any) => {
+  let userData = req.body;
+
+  let validation = registerValidation(userData)
+
+  res.status(200).send(validation);
+};
 
 export const getAllUsers = (req:any, res:any) => {
   let query = `

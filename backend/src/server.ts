@@ -7,6 +7,7 @@ import cartsRouter from "./routers/carts.router"
 const app = express();
 const port = 3000;
 
+app.use(express.json());
 app.use(cors({
   credentials: true,
   origin: ["http://localhost:4200"]

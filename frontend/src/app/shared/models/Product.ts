@@ -3,6 +3,8 @@ export class Product{
   name!: string;
   description!: string;
   price!: number;
-  tags?: string[];
-  imageUrl!: string;
+  first_image_url!: string;
+  category_id!: number;
+  inventory!: number;
+  images?: [];
 }

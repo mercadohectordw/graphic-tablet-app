@@ -22,9 +22,19 @@
           <h2>Monitores</h2>
         </a>
       </li>
-      <li>
-        <a routerLink="/" class="block px-4 py-1 hover:bg-white rounded-xl">
-          <h2>Perfil</h2>
+      <li *ngIf="user.id != null">
+          <a routerLink="/" class="block px-4 py-1 hover:bg-white rounded-xl">
+            <h2>Perfil</h2>
+          </a>
+      </li>
+      <li *ngIf="user.id == null">
+        <a href="/login" class="block px-4 py-1 hover:bg-white rounded-xl">
+          <h2>Iniciar Sesión</h2>
+        </a>
+      </li>
+      <li *ngIf="user.id == null">
+        <a href="/register" class="block px-4 py-1 hover:bg-white rounded-xl">
+          <h2>Registrarse</h2>
         </a>
       </li>
     </ul>

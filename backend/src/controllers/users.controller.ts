@@ -2,9 +2,10 @@ import { db } from "../db";
 import { loginValidation, registerValidation } from "../middleware/validation";
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
+import { Request, Response } from "express";
 const JWT_KEY = process.env.JWT_SECRET || " ";
  
-export const loginUser = (req:any, res:any) => {
+export const loginUser = (req:Request, res:Response) => {
   let logData = req.body;
   let validation = loginValidation(logData);
 
@@ -36,7 +37,7 @@ export const loginUser = (req:any, res:any) => {
     });
 };
 
-export const registerUser = (req:any, res:any) => {
+export const registerUser = (req:Request, res:Response) => {
   let userData = req.body;
   let validation = registerValidation(userData);
   
@@ -84,7 +85,7 @@ export const registerUser = (req:any, res:any) => {
     });
 };
 
-export const getAllUsers = (req:any, res:any) => {
+export const getAllUsers = (req:Request, res:Response) => {
   let query = `
     SELECT first_name, last_name, email, image_url, created_at
     FROM users
@@ -99,7 +100,7 @@ export const getAllUsers = (req:any, res:any) => {
     });
 };
 
-export const getUserById = (req:any, res:any) => {
+export const getUserById = (req:Request, res:Response) => {
   let query = `
     SELECT first_name, last_name, email, image_url, created_at
     FROM users

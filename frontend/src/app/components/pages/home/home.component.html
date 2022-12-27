@@ -6,7 +6,7 @@
   <ul class="flex flex-wrap gap-4">
     <li *ngFor="let p of productos" class="basis-1/5">
       <a routerLink="/product/{{p.id}}">
-        <img src="{{p.imageUrl}}" alt="{{p.name}}" class="w-full h-48 object-contain">
+        <img src="{{p.first_image_url}}" alt="{{p.name}}" class="w-full h-48 object-contain">
       </a>
 
       <a routerLink="/product/{{p.id}}" class="">

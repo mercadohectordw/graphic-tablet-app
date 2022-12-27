@@ -2,6 +2,7 @@ import { db } from "../db";
 import { loginValidation, registerValidation } from "../middleware/validation";
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
+const JWT_KEY = process.env.JWT_SECRET || " ";
  
 export const loginUser = (req:any, res:any) => {
   let logData = req.body;
@@ -26,8 +27,8 @@ export const loginUser = (req:any, res:any) => {
       if(result.length <= 0){
         res.status(400).send("Usuario no encontrado");
       } else {
-        let token = jwt.sign({data: result[0]}, "secret");
-        res.status(200).send("Usuario logueado", result[0], token);
+        let token = jwt.sign({userId: result[0].id}, JWT_KEY);
+        res.status(200).send({token: token});
       }
     })
     .catch((err) => {
@@ -66,7 +67,7 @@ export const registerUser = (req:any, res:any) => {
           .then(([row]) => {
             let result = JSON.parse(JSON.stringify(row));
             
-            res.status(200).json(result);
+            res.status(200).json("Usuario Registrado");
           })
           .catch((err) => {
             console.log("Error en la creación de un nuevo usuario: \n" + err);

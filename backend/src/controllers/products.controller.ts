@@ -1,7 +1,8 @@
+import { Request, Response } from "express";
 import { db } from "../db";
 
 
-export const getAllProducts = (req:any, res:any) => {
+export const getAllProducts = (req:Request, res:Response) => {
   let query = `
     SELECT * FROM product
   `;
@@ -15,7 +16,7 @@ export const getAllProducts = (req:any, res:any) => {
     });
 };
 
-export const getProductsByCategory = (req:any, res:any) => {
+export const getProductsByCategory = (req:Request, res:Response) => {
   let query = `
     SELECT * FROM product
     WHERE category_id = ${[req.params.categoryId]}
@@ -36,7 +37,7 @@ export const getProductsByCategory = (req:any, res:any) => {
     });
 };
 
-export const getProductById = (req:any, res:any) => {
+export const getProductById = (req:Request, res:Response) => {
   let query = `
     SELECT * FROM product
     WHERE id = ${[req.params.productId]}
@@ -57,7 +58,7 @@ export const getProductById = (req:any, res:any) => {
     });
 };
 
-const getProductWithImages = (product:any, res:any) => {
+const getProductWithImages = (product:any, res:Response) => {
   let query = `
     SELECT image_url AS url
     FROM product_image

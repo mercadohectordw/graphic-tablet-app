@@ -1,6 +1,7 @@
+import { Request, Response } from "express";
 import { db } from "../db";
 
-export const getCurrentUserCart = (req:any, res:any) => {
+export const getCurrentUserCart = (req:Request, res:Response) => {
   let query = `
     SELECT * FROM cart
     WHERE user_id = ${req.params.userId}
@@ -23,7 +24,7 @@ export const getCurrentUserCart = (req:any, res:any) => {
     });
 };
 
-const getCartWithItems = (cart:any, res:any) => {
+const getCartWithItems = (cart:any, res:Response) => {
   let query = `
     SELECT ci.product_id, ci.quantity, p.name, p.description, p.first_image_url , p.price AS unit_price
     FROM cart_item ci INNER JOIN product p ON ci.product_id = p.id

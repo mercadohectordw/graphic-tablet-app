@@ -2,8 +2,10 @@ import { db } from "../db";
 import { loginValidation, registerValidation } from "../middleware/validation";
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
+import { Request, Response } from "express";
+const JWT_KEY = process.env.JWT_SECRET || " ";
  
-export const loginUser = (req:any, res:any) => {
+export const loginUser = (req:Request, res:Response) => {
   let logData = req.body;
   let validation = loginValidation(logData);
 
@@ -26,8 +28,8 @@ export const loginUser = (req:any, res:any) => {
       if(result.length <= 0){
         res.status(400).send("Usuario no encontrado");
       } else {
-        let token = jwt.sign({data: result[0]}, "secret");
-        res.status(200).send("Usuario logueado", result[0], token);
+        let token = jwt.sign({userId: result[0].id}, JWT_KEY);
+        res.status(200).send({token: token});
       }
     })
     .catch((err) => {
@@ -35,7 +37,7 @@ export const loginUser = (req:any, res:any) => {
     });
 };
 
-export const registerUser = (req:any, res:any) => {
+export const registerUser = (req:Request, res:Response) => {
   let userData = req.body;
   let validation = registerValidation(userData);
   
@@ -66,7 +68,7 @@ export const registerUser = (req:any, res:any) => {
           .then(([row]) => {
             let result = JSON.parse(JSON.stringify(row));
             
-            res.status(200).json(result);
+            res.status(200).json("Usuario Registrado");
           })
           .catch((err) => {
             console.log("Error en la creación de un nuevo usuario: \n" + err);
@@ -83,7 +85,7 @@ export const registerUser = (req:any, res:any) => {
     });
 };
 
-export const getAllUsers = (req:any, res:any) => {
+export const getAllUsers = (req:Request, res:Response) => {
   let query = `
     SELECT first_name, last_name, email, image_url, created_at
     FROM users
@@ -98,7 +100,7 @@ export const getAllUsers = (req:any, res:any) => {
     });
 };
 
-export const getUserById = (req:any, res:any) => {
+export const getUserById = (req:Request, res:Response) => {
   let query = `
     SELECT first_name, last_name, email, image_url, created_at
     FROM users

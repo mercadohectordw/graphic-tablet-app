@@ -12,16 +12,18 @@
     <span *ngIf="registerUser.get('email')?.hasError('required') && registerUser.get('email')?.touched">El email es requerido</span>
     <span *ngIf="registerUser.get('email')?.hasError('email') && registerUser.get('email')?.touched">El email no tiene el formato correcto</span>
     
-    <input type="text" formControlName="password" class="my-1 px-3 py-1 w-full rounded-lg" placeholder="Contraseña">
+    <input type="password" formControlName="password" class="my-1 px-3 py-1 w-full rounded-lg" placeholder="Contraseña">
     <span *ngIf="registerUser.get('password')?.hasError('required') && registerUser.get('password')?.touched">La contraseña es requerida</span>
     <span *ngIf="registerUser.get('password')?.hasError('pattern') && registerUser.get('password')?.touched">La contraseña debe tener un mínimo de 8 caracteres y un máximo de 16 caracteres</span>
     
     
-    <input type="text" formControlName="confirm_password" class="my-1 px-3 py-1 w-full rounded-lg" placeholder="Confirmar Contraseña">
+    <input type="password" formControlName="confirm_password" class="my-1 px-3 py-1 w-full rounded-lg" placeholder="Confirmar Contraseña">
     <span *ngIf="registerUser.get('confirm_password')?.hasError('required') && registerUser.get('confirm_password')?.touched">La confirmación de la contraseña es requerida</span>
     <span *ngIf="registerUser.get('password')?.value != registerUser.get('confirm_password')?.value && registerUser.get('confirm_password')?.touched">Las contraseñas son distintas</span>
 
     <br><br>
+    <span *ngIf="errorMessage != ''" class="text-red-400">{{errorMessage}}</span>
+    <br>
 
     <button type="submit" class="bg-green-300 p-2 rounded ml-auto">Registrarse</button>
   </form>
